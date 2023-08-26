@@ -1,9 +1,10 @@
-import './Canvas.css'
+import "./Canvas.css";
 import { useEffect, useRef, useState } from "react";
 
 export const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [drawing, setDrawing] = useState(false);
+  const [rotation, setRotation] = useState(0);
 
   useEffect(() => {
     if (canvasRef.current === null) return;
@@ -51,17 +52,26 @@ export const Canvas = () => {
     setDrawing(false);
   };
 
-  const clearCanvas = () => { 
+  const clearCanvas = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const context = canvas.getContext("2d");
     if (!context) return;
     context.clearRect(0, 0, canvas.width, canvas.height);
-  }
+  };
+
+  const rotateClockwise = () => {
+    setRotation(rotation + 90);
+  };
+
+  const rotateCounterClockwise = () => {
+    setRotation(rotation - 90);
+  };
 
   return (
-    <div className='container'>
+    <div className="container">
       <canvas
+        style={{ transform: `rotate(${rotation}deg)` }}
         ref={canvasRef}
         onMouseDown={startDrawing}
         onMouseMove={draw}
@@ -69,6 +79,10 @@ export const Canvas = () => {
         onMouseOut={stopDrawing}
       />
       <button onClick={clearCanvas}>Clear</button>
+      <div className="rotation">
+        <button onClick={rotateClockwise}>Rotate Clockwise</button>
+        <button onClick={rotateCounterClockwise}>Rotate Counerclockwise</button>
+      </div>
     </div>
   );
 };

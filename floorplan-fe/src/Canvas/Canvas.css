@@ -1,11 +1,17 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.rotation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
 canvas {
-    border: 2px solid #454444;
-    margin: 1em;
-    border-radius: 10px;
+  border: 2px solid #454444;
+  margin: 1em;
+  border-radius: 10px;
 }
